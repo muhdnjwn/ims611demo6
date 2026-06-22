@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>e-Saku – SMK Setia Alam</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#C8102E;--red-dark:#9e0c23;--red-light:#f5e6e9;--yellow:#FFD700;--yellow-dark:#e6c200;--yellow-light:#fffbe6;--off-white:#fafafa;--text:#1a1a1a;--muted:#666;--border:#e0e0e0;--shadow:0 4px 24px rgba(200,16,46,0.08);--radius:16px;--radius-sm:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);}
+h1,h2,h3,h4{font-family:'Poppins',sans-serif;}
+.page{display:none;min-height:100vh;flex-direction:column;}
+.page.page-active{display:flex;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;border-radius:50px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:all .2s;font-family:'Poppins',sans-serif;}
+.btn-primary{background:var(--red);color:#fff;}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,16,46,.3);}
+.btn-yellow{background:var(--yellow);color:var(--text);}
+.btn-yellow:hover{background:var(--yellow-dark);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--red);border:2px solid var(--red);}
+.btn-outline:hover{background:var(--red);color:#fff;}
+.btn-ghost{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4);}
+.btn-ghost:hover{background:rgba(255,255,255,.25);}
+.btn-full{width:100%;}
+.btn-sm{padding:8px 18px;font-size:.85rem;}
+.hidden{display:none!important;}
+.pb{padding-bottom:80px;}
+input,select{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.95rem;font-family:'Inter',sans-serif;background:#fff;color:var(--text);transition:border .2s;outline:none;}
+input:focus,select:focus{border-color:var(--red);}
+label{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:6px;display:block;}
+.form-group{margin-bottom:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.topbar{background:var(--red);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.topbar-logo{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:800;}
+.topbar-logo span{color:var(--yellow);}
+.back-btn{background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;padding:0;margin-right:10px;}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--yellow);color:var(--text);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;cursor:pointer;}
+.scroll-area{flex:1;overflow-y:auto;padding:20px;max-width:480px;width:100%;margin:0 auto;}
+.bottom-nav{background:#fff;border-top:1px solid var(--border);display:flex;padding:10px 0 16px;flex-shrink:0;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:4px;transition:all .2s;}
+.nav-item .ni-icon{font-size:1.4rem;color:var(--muted);}
+.nav-item .ni-label{font-size:.68rem;font-weight:600;color:var(--muted);font-family:'Poppins',sans-serif;}
+.nav-item.active .ni-icon,.nav-item.active .ni-label{color:var(--red);}
+/* LANDING */
+.landing-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:#fff;border-bottom:1px solid var(--border);flex-shrink:0;}
+.logo{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;color:var(--red);}
+.logo span{color:var(--yellow-dark);}
+.landing-scroll{flex:1;overflow-y:auto;}
+.hero{background:linear-gradient(135deg,var(--red) 0%,#9e0c23 60%,#7a0a1c 100%);color:#fff;padding:60px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,215,0,.12);pointer-events:none;}
+.hero-badge{display:inline-block;background:var(--yellow);color:var(--text);font-size:.78rem;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:18px;}
+.hero h1{font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:16px;}
+.hero h1 span{color:var(--yellow);}
+.hero p{font-size:1rem;color:rgba(255,255,255,.85);max-width:340px;margin:0 auto 32px;line-height:1.7;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.hero-mockup{margin:40px auto 0;max-width:260px;background:rgba(255,255,255,.12);border-radius:20px;padding:20px;border:1px solid rgba(255,255,255,.2);}
+.mockup-balance .lbl{font-size:.75rem;color:rgba(255,255,255,.7);}
+.mockup-balance .amt{font-size:2rem;font-weight:800;color:var(--yellow);margin-bottom:14px;}
+.mockup-card{background:rgba(255,215,0,.2);border-radius:10px;padding:12px;border:1px solid rgba(255,215,0,.3);display:flex;justify-content:space-between;align-items:center;}
+.mockup-card .cn{font-size:.8rem;font-weight:600;}
+.mockup-card .cn2{font-size:.72rem;color:rgba(255,255,255,.7);}
+.chip{width:26px;height:18px;background:var(--yellow);border-radius:3px;opacity:.8;}
+.features{padding:48px 24px;}
+.section-title{text-align:center;margin-bottom:32px;}
+.section-title h2{font-size:1.6rem;font-weight:800;margin-bottom:8px;}
+.section-title h2 span{color:var(--red);}
+.section-title p{color:var(--muted);font-size:.9rem;}
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:480px;margin:0 auto;}
+.feature-card{background:#fff;border-radius:var(--radius);padding:18px;border:1.5px solid var(--border);transition:all .2s;}
+.feature-card:hover{border-color:var(--red);box-shadow:var(--shadow);transform:translateY(-2px);}
+.feature-icon{font-size:1.8rem;margin-bottom:8px;}
+.feature-card h3{font-size:.9rem;font-weight:700;margin-bottom:5px;}
+.feature-card p{font-size:.8rem;color:var(--muted);line-height:1.5;}
+.cta-section{background:linear-gradient(135deg,var(--yellow),#ffbd00);padding:44px 24px;text-align:center;margin:0 16px 40px;border-radius:var(--radius);}
+.cta-section h2{font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:10px;}
+.cta-section p{color:rgba(0,0,0,.6);margin-bottom:22px;font-size:.9rem;}
+.footer{background:var(--red);color:rgba(255,255,255,.8);text-align:center;padding:22px;font-size:.82rem;}
+.footer strong{color:var(--yellow);}
+/* AUTH */
+.auth-body{flex:1;overflow-y:auto;padding:28px 20px;}
+.auth-inner{max-width:480px;width:100%;margin:0 auto;}
+.auth-logo-box{text-align:center;margin-bottom:24px;}
+.auth-logo-box .logo-big{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;color:var(--red);}
+.auth-logo-box .logo-big span{color:var(--yellow-dark);}
+.auth-logo-box p{color:var(--muted);font-size:.88rem;margin-top:4px;}
+.auth-card{background:#fff;border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.auth-card h2{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+.auth-card .subtitle{color:var(--muted);font-size:.88rem;margin-bottom:22px;}
+.divider{text-align:center;color:var(--muted);font-size:.82rem;margin:16px 0;position:relative;}
+.divider::before,.divider::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:var(--border);}
+.divider::before{left:0;}.divider::after{right:0;}
+.auth-switch{text-align:center;margin-top:18px;font-size:.88rem;color:var(--muted);}
+.auth-switch a{color:var(--red);font-weight:600;cursor:pointer;}
+.forgot{text-align:right;font-size:.82rem;margin-top:-10px;margin-bottom:16px;}
+.forgot a{color:var(--red);cursor:pointer;}
+.child-box{background:var(--yellow-light);border-radius:10px;padding:14px;margin-bottom:18px;border:1.5px solid var(--yellow);}
+.child-box .child-title{font-size:.8rem;font-weight:700;color:#a07b00;margin-bottom:10px;}
+/* DASHBOARD */
+.wallet-card{background:linear-gradient(135deg,var(--red),#9e0c23);border-radius:20px;padding:24px;color:#fff;margin-bottom:18px;position:relative;overflow:hidden;}
+.wallet-card::after{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,215,0,.15);pointer-events:none;}
+.wc-label{font-size:.8rem;color:rgba(255,255,255,.75);margin-bottom:4px;}
+.wc-balance{font-size:2.4rem;font-weight:800;margin-bottom:4px;}
+.wc-balance span{font-size:1rem;font-weight:500;color:rgba(255,255,255,.8);}
+.wc-child{font-size:.85rem;color:rgba(255,255,255,.8);margin-bottom:18px;}
+.wc-child strong{color:var(--yellow);}
+.wc-actions{display:flex;gap:10px;}
+.wc-btn{flex:1;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:10px 8px;color:#fff;font-size:.8rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;font-family:'Poppins',sans-serif;}
+.wc-btn:hover{background:rgba(255,255,255,.25);}
+.wc-icon{font-size:1.3rem;display:block;margin-bottom:4px;}
+.quick-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.stat-card{background:#fff;border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border);}
+.stat-label{font-size:.78rem;color:var(--muted);margin-bottom:4px;}
+.stat-value{font-size:1.3rem;font-weight:800;}
+.stat-sub{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.linked-card-row{background:#fff;border-radius:var(--radius-sm);padding:16px;border:1.5px solid var(--border);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.card-visual{width:54px;height:34px;border-radius:6px;background:linear-gradient(120deg,var(--red),var(--yellow));display:flex;align-items:center;justify-content:center;font-size:.62rem;color:#fff;font-weight:700;flex-shrink:0;}
+.card-info h4{font-size:.9rem;font-weight:700;}
+.card-info p{font-size:.78rem;color:var(--muted);}
+.tag{display:inline-block;padding:4px 12px;border-radius:50px;font-size:.75rem;font-weight:600;}
+.tag-green{background:#e6f9f0;color:#1a9e5c;}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.section-header h3{font-size:1rem;font-weight:700;}
+.section-header a{font-size:.82rem;color:var(--red);font-weight:600;cursor:pointer;}
+.txn-list{display:flex;flex-direction:column;gap:10px;}
+.txn-item{background:#fff;border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid var(--border);}
+.txn-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.txn-icon.topup{background:var(--yellow-light);}
+.txn-icon.spend{background:var(--red-light);}
+.txn-info{flex:1;}
+.txn-info h4{font-size:.88rem;font-weight:600;}
+.txn-info p{font-size:.76rem;color:var(--muted);}
+.txn-amount{font-weight:700;font-size:.92rem;}
+.txn-amount.pos{color:#1a9e5c;}
+.txn-amount.neg{color:var(--red);}
+.greeting{margin-bottom:18px;}
+.greeting h2{font-size:1.2rem;font-weight:700;}
+.greeting p{font-size:.85rem;color:var(--muted);}
+/* TOP UP */
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+.amount-btn{padding:13px 8px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:#fff;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;}
+.amount-btn:hover,.amount-btn.active{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.pay-method{background:#fff;border-radius:var(--radius-sm);padding:16px;border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .2s;margin-bottom:10px;}
+.pay-method:hover,.pay-method.active{border-color:var(--red);background:var(--red-light);}
+.pm-icon{font-size:1.8rem;}
+.pm-info h4{font-size:.9rem;font-weight:700;}
+.pm-info p{font-size:.76rem;color:var(--muted);}
+.pm-check{margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;}
+.pay-method.active .pm-check{background:var(--red);border-color:var(--red);}
+/* PAYMENT GATEWAY */
+.gw-tab{padding:8px 14px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Poppins',sans-serif;}
+.gw-tab.active{background:var(--red);color:#fff;border-color:var(--red);}
+.gateway-badge{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.gw-pill{display:inline-block;padding:3px 8px;border-radius:50px;font-size:.68rem;font-weight:700;}
+.ew-method{background:#fff;border-radius:var(--radius-sm);padding:14px;border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;margin-bottom:10px;}
+.ew-method:hover,.ew-method.active{border-color:var(--red);background:var(--red-light);}
+.ew-logo{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ew-info{flex:1;}
+.ew-name{font-size:.9rem;font-weight:700;}
+.ew-sub{font-size:.72rem;color:var(--muted);}
+.ew-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;flex-shrink:0;}
+.active-check{background:var(--red);border-color:var(--red);}
+/* FPX */
+.fpx-info{background:var(--yellow-light);border:1px solid var(--yellow);border-radius:8px;padding:10px 12px;font-size:.78rem;color:#7a5c00;margin-bottom:12px;}
+.bank-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.bank-btn{padding:12px 8px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:#fff;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;}
+.bank-btn:hover,.bank-btn.active{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.bank-logo{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#fff;flex-shrink:0;}
+/* Card */
+.card-preview{background:linear-gradient(135deg,var(--red),#9e0c23);border-radius:14px;padding:20px;color:#fff;margin-bottom:18px;}
+.cp-num{font-size:1.1rem;letter-spacing:3px;font-weight:600;margin-bottom:14px;}
+.cp-row{display:flex;justify-content:space-between;font-size:.8rem;}
+.cp-label{color:rgba(255,255,255,.65);font-size:.68rem;}
+.white-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:16px;}
+/* HISTORY */
+.filter-tabs{display:flex;gap:8px;margin-bottom:18px;overflow-x:auto;padding-bottom:4px;}
+.filter-tab{padding:8px 16px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Poppins',sans-serif;}
+.filter-tab.active{background:var(--red);color:#fff;border-color:var(--red);}
+.date-label{font-size:.76rem;font-weight:600;color:var(--muted);margin:14px 0 8px;}
+/* CARD PAGE */
+.physical-card{background:linear-gradient(135deg,var(--red),#7a0a1c);border-radius:20px;padding:28px 24px;color:#fff;margin-bottom:20px;box-shadow:0 12px 40px rgba(200,16,46,.35);position:relative;overflow:hidden;}
+.physical-card::before{content:'';position:absolute;bottom:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,215,0,.2);}
+.pc-logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:22px;}
+.pc-logo span{color:var(--yellow);}
+.pc-chip{width:36px;height:26px;background:var(--yellow);border-radius:4px;margin-bottom:18px;opacity:.9;}
+.pc-number{font-size:1.05rem;letter-spacing:4px;font-weight:600;margin-bottom:14px;}
+.pc-row{display:flex;justify-content:space-between;}
+.pc-label{font-size:.62rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;}
+.pc-val{font-size:.88rem;font-weight:600;}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.card-action-btn{padding:14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:#fff;cursor:pointer;text-align:center;transition:all .2s;font-family:'Poppins',sans-serif;}
+.card-action-btn:hover{border-color:var(--red);background:var(--red-light);}
+.ca-icon{font-size:1.5rem;margin-bottom:5px;}
+.card-action-btn h4{font-size:.82rem;font-weight:700;}
+.card-action-btn p{font-size:.73rem;color:var(--muted);}
+.limit-bar{height:8px;background:#f2f2f2;border-radius:50px;overflow:hidden;margin:8px 0 6px;}
+.limit-fill{width:26%;height:100%;background:var(--red);border-radius:50px;}
+/* SUCCESS */
+.success-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;}
+.success-icon{font-size:4rem;margin-bottom:16px;}
+.success-screen h2{font-size:1.4rem;font-weight:800;margin-bottom:8px;}
+.success-screen p{color:var(--muted);margin-bottom:24px;}
+.receipt-box{background:var(--yellow-light);border-radius:var(--radius);padding:20px;width:100%;max-width:360px;text-align:left;border:1.5px solid var(--yellow);margin-bottom:24px;}
+.receipt-row{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:8px;}
+.receipt-row:last-child{margin-bottom:0;}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a1a1a;color:#fff;padding:12px 24px;border-radius:50px;font-size:.88rem;font-weight:500;z-index:9999;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.show{opacity:1;pointer-events:all;}
+.modal-sheet{background:#fff;border-radius:24px 24px 0 0;padding:24px 24px 40px;width:100%;max-width:480px;transform:translateY(100%);transition:transform .35s cubic-bezier(.32,.72,0,1);}
+.modal-overlay.show .modal-sheet{transform:translateY(0);}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 18px;}
+.modal-title{font-size:1.1rem;font-weight:800;margin-bottom:16px;}
+/* FPX PIN pad */
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+.pin-btn{padding:14px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;}
+.pin-btn:hover{background:var(--red-light);border-color:var(--red);}
+.pin-display{display:flex;gap:12px;justify-content:center;margin-bottom:14px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);transition:all .2s;}
+.pin-dot.filled{background:var(--red);border-color:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- ═══ LANDING ═══ -->
+<div id="page-landing" class="page page-active">
+  <nav class="landing-nav">
+    <div class="logo">e-<span>Saku</span></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-outline btn-sm" onclick="nav('login')">Log In</button>
+      <button class="btn btn-primary btn-sm" onclick="nav('register')">Register</button>
+    </div>
+  </nav>
+  <div class="landing-scroll">
+    <div class="hero">
+      <div class="hero-badge">🏫 SMK Setia Alam Official E-Wallet</div>
+      <h1>Your Child's Money,<br><span>Always in Check</span></h1>
+      <p>Top up, track spending, and link to your child's school card — all from your phone.</p>
+      <div class="hero-btns">
+        <button class="btn btn-yellow" onclick="nav('register')">Get Started Free</button>
+        <button class="btn btn-ghost" onclick="nav('login')">Log In</button>
+      </div>
+      <div class="hero-mockup">
+        <div class="mockup-balance"><div class="lbl">Wallet Balance</div><div class="amt">RM 120.50</div></div>
+        <div class="mockup-card"><div><div class="cn">Ahmad Rifqi</div><div class="cn2">•••• •••• •••• 4821</div></div><div class="chip"></div></div>
+      </div>
+    </div>
+    <div class="features">
+      <div class="section-title"><h2>Everything You Need to <span>Stay in Control</span></h2><p>Simple tools for parents, safe spending for students.</p></div>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">💳</div><h3>Linked School Card</h3><p>Connected to your child's physical card for canteen & school purchases.</p></div>
+        <div class="feature-card"><div class="feature-icon">📊</div><h3>Spending Tracker</h3><p>See exactly what was bought, when, and how much was spent.</p></div>
+        <div class="feature-card"><div class="feature-icon">⚡</div><h3>Instant Top Up</h3><p>Top up via FPX, QR code, or credit/debit card in seconds.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔒</div><h3>Secure & Safe</h3><p>Bank-grade security to protect every transaction your child makes.</p></div>
+      </div>
+    </div>
+    <div style="padding:0 16px;"><div class="cta-section"><h2>Ready to Get Started?</h2><p>Join thousands of parents at SMK Setia Alam managing school spending the smart way.</p><button class="btn btn-primary" onclick="nav('register')">Create Free Account →</button></div></div>
+    <div class="footer"><p>© 2025 <strong>e-Saku</strong> · SMK Setia Alam · All Rights Reserved</p></div>
+  </div>
+</div>
+
+
+<!-- ═══ REGISTER ═══ -->
+<div id="page-register" class="page">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <button class="back-btn" onclick="nav('landing')">←</button>
+      <div class="topbar-logo">e-<span>Saku</span></div>
+    </div>
+  </div>
+  <div class="auth-body">
+    <div class="auth-inner">
+      <div class="auth-logo-box"><div class="logo-big">e-<span>Saku</span></div><p>SMK Setia Alam Parent Portal</p></div>
+      <div class="auth-card">
+        <h2>Parent Registration</h2>
+        <div class="subtitle">Fill in your details to create your e-Saku account.</div>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" id="reg-name" placeholder="e.g. Nur Aisyah Binti Ali"/></div>
+          <div class="form-group"><label>IC Number</label><input type="text" id="reg-ic" placeholder="000000-00-0000"/></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="reg-email" placeholder="parent@email.com"/></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="reg-phone" placeholder="01X-XXXXXXXX"/></div>
+        <div class="form-row">
+          <div class="form-group"><label>Password</label><input type="password" id="reg-pass" placeholder="Min. 8 characters"/></div>
+          <div class="form-group"><label>Confirm Password</label><input type="password" id="reg-pass2" placeholder="Re-enter password"/></div>
+        </div>
+        <div class="child-box">
+          <div class="child-title">👦 Child's Information</div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Child's Full Name</label><input type="text" id="reg-child" placeholder="e.g. Muhammad Faris"/></div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;"><label>Class</label><input type="text" id="reg-class" placeholder="e.g. 4 Amanah"/></div>
+            <div class="form-group" style="margin-bottom:0;"><label>Student ID</label><input type="text" id="reg-sid" placeholder="SMK2024001"/></div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="doRegister()">Create My Account</button>
+        <div class="auth-switch">Already have an account? <a onclick="nav('login')">Log In</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ LOGIN ═══ -->
+<div id="page-login" class="page">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <button class="back-btn" onclick="nav('landing')">←</button>
+      <div class="topbar-logo">e-<span>Saku</span></div>
+    </div>
+  </div>
+  <div class="auth-body">
+    <div class="auth-inner">
+      <div class="auth-logo-box"><div class="logo-big">e-<span>Saku</span></div><p>SMK Setia Alam Parent Portal</p></div>
+      <div class="auth-card">
+        <h2>Welcome Back 👋</h2>
+        <div class="subtitle">Log in to manage your child's school wallet.</div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="login-email" placeholder="parent@email.com"/></div>
+        <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="Enter your password"/></div>
+        <div class="forgot"><a>Forgot password?</a></div>
+        <button class="btn btn-primary btn-full" onclick="doLogin()">Log In</button>
+        <div class="divider">or continue with</div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-outline btn-full" style="font-size:.85rem;" onclick="toast('Google login coming soon!')">🔵 Google</button>
+          <button class="btn btn-outline btn-full" style="font-size:.85rem;" onclick="toast('MyKad login coming soon!')">🇲🇾 MyKad</button>
+        </div>
+        <div class="auth-switch">Don't have an account? <a onclick="nav('register')">Register</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ DASHBOARD ═══ -->
+<div id="page-dashboard" class="page">
+  <div class="topbar">
+    <div class="topbar-logo">e-<span>Saku</span></div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="btn btn-ghost btn-sm" style="font-size:.78rem;" onclick="doLogout()">🚪 Log Out</button>
+      <div class="avatar" id="dash-avatar">N</div>
+    </div>
+  </div>
+  <div class="scroll-area pb">
+    <div class="greeting" style="margin-top:4px;">
+      <h2>Hello, <span id="dash-parent-name">Parent</span> 👋</h2>
+      <p id="dash-date">Loading date...</p>
+    </div>
+    <div class="wallet-card">
+      <div class="wc-label">Total Wallet Balance</div>
+      <div class="wc-balance"><span>RM </span><span id="dash-balance">120.50</span></div>
+      <div class="wc-child">Child: <strong id="dash-child-name">Child</strong> · <span id="dash-child-class">-</span></div>
+      <div class="wc-actions">
+        <button class="wc-btn" onclick="nav('topup')"><span class="wc-icon">⬆️</span>Top Up</button>
+        <button class="wc-btn" onclick="nav('transfer')"><span class="wc-icon">💸</span>Transfer</button>
+        <button class="wc-btn" onclick="nav('history')"><span class="wc-icon">📋</span>History</button>
+        <button class="wc-btn" onclick="nav('card')"><span class="wc-icon">💳</span>My Card</button>
+      </div>
+    </div>
+    <div class="quick-stats">
+      <div class="stat-card"><div class="stat-label">Spent This Month</div><div class="stat-value" style="color:var(--red);">RM 43.20</div><div class="stat-sub">↓ 12% vs last month</div></div>
+      <div class="stat-card"><div class="stat-label">Top-ups This Month</div><div class="stat-value" style="color:#1a9e5c;" id="dash-topup-stat">RM 100.00</div><div class="stat-sub" id="dash-topup-count">2 transactions</div></div>
+    </div>
+    <div class="linked-card-row">
+      <div class="card-visual">e-Saku</div>
+      <div class="card-info"><h4>School Card</h4><p>•••• •••• •••• 4821</p></div>
+      <div style="margin-left:auto;"><span class="tag tag-green">● Active</span></div>
+    </div>
+    <div class="section-header"><h3>Recent Transactions</h3><a onclick="nav('history')">See All</a></div>
+    <div class="txn-list" id="dash-txn-list">
+      <div class="txn-item"><div class="txn-icon topup">⬆️</div><div class="txn-info"><h4>Top Up via FPX</h4><p>Today, 9:14 AM</p></div><div class="txn-amount pos">+RM 50.00</div></div>
+      <div class="txn-item"><div class="txn-icon spend">🍱</div><div class="txn-info"><h4>Canteen – Nasi Lemak</h4><p>Today, 7:45 AM</p></div><div class="txn-amount neg">-RM 3.50</div></div>
+      <div class="txn-item"><div class="txn-icon spend">📚</div><div class="txn-info"><h4>School Bookshop</h4><p>Yesterday, 2:10 PM</p></div><div class="txn-amount neg">-RM 12.00</div></div>
+      <div class="txn-item"><div class="txn-icon topup">⬆️</div><div class="txn-info"><h4>Top Up via DuitNow QR</h4><p>19 Jun 2026</p></div><div class="txn-amount pos">+RM 50.00</div></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="bottomNav(this,'dashboard')"><div class="ni-icon">🏠</div><div class="ni-label">Home</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'topup')"><div class="ni-icon">⬆️</div><div class="ni-label">Top Up</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'history')"><div class="ni-icon">📋</div><div class="ni-label">History</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'card')"><div class="ni-icon">💳</div><div class="ni-label">My Card</div></div>
+  </div>
+</div>
+
+
+<!-- ═══ TOP UP ═══ -->
+<div id="page-topup" class="page">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <button class="back-btn" onclick="nav('dashboard')">←</button>
+      <div class="topbar-logo">Top Up Wallet</div>
+    </div>
+    <div style="color:rgba(255,255,255,.85);font-size:.85rem;">Balance: <strong style="color:var(--yellow);">RM <span id="topup-bal-display">120.50</span></strong></div>
+  </div>
+  <div class="scroll-area pb">
+    <div class="white-card">
+      <label style="margin-bottom:8px;">Enter Amount (RM)</label>
+      <input type="number" id="topup-amount" placeholder="0.00" style="font-size:1.5rem;font-weight:700;text-align:center;" oninput="clearAmountBtns()"/>
+      <div class="amount-grid">
+        <button class="amount-btn" onclick="setAmount(10,this)">RM 10</button>
+        <button class="amount-btn" onclick="setAmount(20,this)">RM 20</button>
+        <button class="amount-btn" onclick="setAmount(30,this)">RM 30</button>
+        <button class="amount-btn" onclick="setAmount(50,this)">RM 50</button>
+        <button class="amount-btn" onclick="setAmount(100,this)">RM 100</button>
+        <button class="amount-btn" onclick="setAmount(200,this)">RM 200</button>
+      </div>
+    </div>
+
+    <!-- PAYMENT GATEWAY SECTION -->
+    <div class="white-card">
+      <div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">Select Payment Gateway</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-bottom:14px;">Powered by real Malaysian payment providers</div>
+
+      <!-- ── CATEGORY TABS ── -->
+      <div style="display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px;">
+        <button class="gw-tab active" onclick="gwTab(this,'bank')">🏦 Online Banking</button>
+        <button class="gw-tab" onclick="gwTab(this,'ewallet')">📱 E-Wallet</button>
+        <button class="gw-tab" onclick="gwTab(this,'card')">💳 Card</button>
+        <button class="gw-tab" onclick="gwTab(this,'bnpl')">🛒 BNPL</button>
+      </div>
+
+      <!-- ── ONLINE BANKING (FPX via Billplz / iPay88) ── -->
+      <div id="gw-bank">
+        <div class="gateway-badge">
+          <span style="font-size:.72rem;color:var(--muted);">Powered by</span>
+          <span class="gw-pill" style="background:#0067b1;color:#fff;">Billplz</span>
+          <span class="gw-pill" style="background:#ef7f1a;color:#fff;">iPay88</span>
+          <span class="gw-pill" style="background:#e31837;color:#fff;">MOLPay</span>
+        </div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px;background:var(--yellow-light);border-radius:8px;padding:8px 10px;border-left:3px solid var(--yellow);">
+          🔐 FPX — You'll be securely redirected to your bank's portal to authorise payment.
+        </div>
+        <div style="font-size:.8rem;font-weight:700;margin-bottom:8px;color:var(--text);">Select Bank</div>
+        <div class="bank-grid">
+          <button class="bank-btn" onclick="selectBank(this,'Maybank2u','#f4d000','#333')">
+            <div class="bank-logo" style="background:#f4d000;color:#333;">M</div>Maybank2u
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'CIMB Clicks','#ce1126','#fff')">
+            <div class="bank-logo" style="background:#ce1126;">C</div>CIMB Clicks
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'RHB Now','#005baa','#fff')">
+            <div class="bank-logo" style="background:#005baa;">R</div>RHB Now
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'Public Bank','#003087','#fff')">
+            <div class="bank-logo" style="background:#003087;">P</div>Public Bank
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'Hong Leong','#d4a017','#fff')">
+            <div class="bank-logo" style="background:#d4a017;">H</div>Hong Leong
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'AmBank','#e87722','#fff')">
+            <div class="bank-logo" style="background:#e87722;">A</div>AmBank
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'BSN','#009e49','#fff')">
+            <div class="bank-logo" style="background:#009e49;">B</div>BSN
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'Bank Islam','#006738','#fff')">
+            <div class="bank-logo" style="background:#006738;">BI</div>Bank Islam
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'Alliance Bank','#d71920','#fff')">
+            <div class="bank-logo" style="background:#d71920;">A</div>Alliance
+          </button>
+          <button class="bank-btn" onclick="selectBank(this,'Bank Rakyat','#009a44','#fff')">
+            <div class="bank-logo" style="background:#009a44;">BR</div>Bank Rakyat
+          </button>
+        </div>
+      </div>
+
+      <!-- ── E-WALLET ── -->
+      <div id="gw-ewallet" class="hidden">
+        <div class="gateway-badge">
+          <span style="font-size:.72rem;color:var(--muted);">Powered by</span>
+          <span class="gw-pill" style="background:#00b2ff;color:#fff;">iPay88</span>
+          <span class="gw-pill" style="background:#ff6900;color:#fff;">Stripe</span>
+        </div>
+
+        <!-- DuitNow QR -->
+        <div class="ew-method active" id="ew-duitnow" onclick="selectEwallet('duitnow')">
+          <div class="ew-logo" style="background:linear-gradient(135deg,#e31837,#c8102e);">
+            <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="none"/><path d="M8 20h24M20 8v24" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="20" r="6" fill="#fff"/></svg>
+          </div>
+          <div class="ew-info"><div class="ew-name">DuitNow QR</div><div class="ew-sub">Bank Negara Malaysia · Instant</div></div>
+          <div class="ew-check active-check">✓</div>
+        </div>
+
+        <!-- TNG eWallet -->
+        <div class="ew-method" id="ew-tng" onclick="selectEwallet('tng')">
+          <div class="ew-logo" style="background:linear-gradient(135deg,#0057a8,#003d7a);">
+            <svg width="22" height="14" viewBox="0 0 60 36" fill="none"><rect width="60" height="36" rx="4" fill="none"/><path d="M5 18h50" stroke="#FFD700" stroke-width="4"/><path d="M15 8l10 10-10 10" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ew-info"><div class="ew-name">Touch 'n Go eWallet</div><div class="ew-sub">Malaysia's No.1 e-wallet</div></div>
+          <div class="ew-check"></div>
+        </div>
+
+        <!-- GrabPay -->
+        <div class="ew-method" id="ew-grab" onclick="selectEwallet('grab')">
+          <div class="ew-logo" style="background:linear-gradient(135deg,#00b14f,#007d38);">
+            <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="#fff" stroke-width="3"/><path d="M14 20h8v-6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="ew-info"><div class="ew-name">GrabPay</div><div class="ew-sub">Pay with Grab credits</div></div>
+          <div class="ew-check"></div>
+        </div>
+
+        <!-- ShopeePay -->
+        <div class="ew-method" id="ew-shopee" onclick="selectEwallet('shopee')">
+          <div class="ew-logo" style="background:linear-gradient(135deg,#ff5722,#e64a19);">
+            <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><path d="M12 16h16l-2 12H14L12 16z" stroke="#fff" stroke-width="2.5" fill="none"/><path d="M16 16c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#fff" stroke-width="2.5" fill="none"/></svg>
+          </div>
+          <div class="ew-info"><div class="ew-name">ShopeePay</div><div class="ew-sub">Pay with ShopeePay balance</div></div>
+          <div class="ew-check"></div>
+        </div>
+
+        <!-- DuitNow QR Panel -->
+        <div id="panel-duitnow" style="margin-top:14px;">
+          <div style="background:#fff;border:2px solid #e0e0e0;border-radius:14px;width:190px;height:190px;margin:0 auto 12px;padding:10px;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 37 37" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;shape-rendering:crispEdges;">
+              <rect x="0" y="0" width="11" height="11" fill="#000"/><rect x="1" y="1" width="9" height="9" fill="#fff"/><rect x="2" y="2" width="7" height="7" fill="#000"/><rect x="3" y="3" width="5" height="5" fill="#fff"/><rect x="4" y="4" width="3" height="3" fill="#000"/>
+              <rect x="26" y="0" width="11" height="11" fill="#000"/><rect x="27" y="1" width="9" height="9" fill="#fff"/><rect x="28" y="2" width="7" height="7" fill="#000"/><rect x="29" y="3" width="5" height="5" fill="#fff"/><rect x="30" y="4" width="3" height="3" fill="#000"/>
+              <rect x="0" y="26" width="11" height="11" fill="#000"/><rect x="1" y="27" width="9" height="9" fill="#fff"/><rect x="2" y="28" width="7" height="7" fill="#000"/><rect x="3" y="29" width="5" height="5" fill="#fff"/><rect x="4" y="30" width="3" height="3" fill="#000"/>
+              <rect x="13" y="0" width="1" height="1" fill="#000"/><rect x="15" y="0" width="2" height="1" fill="#000"/><rect x="19" y="0" width="1" height="1" fill="#000"/><rect x="22" y="0" width="2" height="1" fill="#000"/>
+              <rect x="12" y="1" width="1" height="1" fill="#000"/><rect x="14" y="1" width="1" height="1" fill="#000"/><rect x="18" y="1" width="1" height="1" fill="#000"/><rect x="20" y="1" width="2" height="1" fill="#000"/><rect x="24" y="1" width="1" height="1" fill="#000"/>
+              <rect x="13" y="2" width="2" height="1" fill="#000"/><rect x="17" y="2" width="1" height="1" fill="#000"/><rect x="22" y="2" width="2" height="1" fill="#000"/>
+              <rect x="12" y="3" width="1" height="1" fill="#000"/><rect x="15" y="3" width="2" height="1" fill="#000"/><rect x="18" y="3" width="1" height="1" fill="#000"/><rect x="23" y="3" width="2" height="1" fill="#000"/>
+              <rect x="13" y="4" width="1" height="1" fill="#000"/><rect x="16" y="4" width="1" height="1" fill="#000"/><rect x="19" y="4" width="2" height="1" fill="#000"/><rect x="22" y="4" width="1" height="1" fill="#000"/>
+              <rect x="12" y="5" width="2" height="1" fill="#000"/><rect x="15" y="5" width="1" height="1" fill="#000"/><rect x="17" y="5" width="2" height="1" fill="#000"/><rect x="23" y="5" width="2" height="1" fill="#000"/>
+              <rect x="0" y="12" width="1" height="1" fill="#000"/><rect x="2" y="12" width="2" height="1" fill="#000"/><rect x="5" y="12" width="1" height="1" fill="#000"/><rect x="7" y="12" width="2" height="1" fill="#000"/><rect x="10" y="12" width="1" height="1" fill="#000"/>
+              <rect x="12" y="12" width="1" height="1" fill="#000"/><rect x="14" y="12" width="2" height="1" fill="#000"/><rect x="17" y="12" width="1" height="1" fill="#000"/><rect x="19" y="12" width="2" height="1" fill="#000"/><rect x="22" y="12" width="1" height="1" fill="#000"/><rect x="26" y="12" width="2" height="1" fill="#000"/><rect x="29" y="12" width="1" height="1" fill="#000"/><rect x="31" y="12" width="2" height="1" fill="#000"/><rect x="35" y="12" width="2" height="1" fill="#000"/>
+              <rect x="0" y="13" width="2" height="1" fill="#000"/><rect x="3" y="13" width="1" height="1" fill="#000"/><rect x="6" y="13" width="2" height="1" fill="#000"/><rect x="9" y="13" width="1" height="1" fill="#000"/><rect x="13" y="13" width="1" height="1" fill="#000"/><rect x="15" y="13" width="2" height="1" fill="#000"/><rect x="18" y="13" width="1" height="1" fill="#000"/><rect x="21" y="13" width="2" height="1" fill="#000"/><rect x="27" y="13" width="1" height="1" fill="#000"/><rect x="30" y="13" width="2" height="1" fill="#000"/><rect x="33" y="13" width="1" height="1" fill="#000"/>
+              <rect x="1" y="14" width="1" height="1" fill="#000"/><rect x="4" y="14" width="2" height="1" fill="#000"/><rect x="7" y="14" width="1" height="1" fill="#000"/><rect x="10" y="14" width="1" height="1" fill="#000"/><rect x="12" y="14" width="2" height="1" fill="#000"/><rect x="16" y="14" width="1" height="1" fill="#000"/><rect x="19" y="14" width="1" height="1" fill="#000"/><rect x="22" y="14" width="2" height="1" fill="#000"/><rect x="28" y="14" width="2" height="1" fill="#000"/><rect x="31" y="14" width="1" height="1" fill="#000"/><rect x="34" y="14" width="2" height="1" fill="#000"/>
+              <rect x="0" y="15" width="1" height="1" fill="#000"/><rect x="3" y="15" width="2" height="1" fill="#000"/><rect x="6" y="15" width="1" height="1" fill="#000"/><rect x="9" y="15" width="2" height="1" fill="#000"/><rect x="13" y="15" width="1" height="1" fill="#000"/><rect x="15" y="15" width="2" height="1" fill="#000"/><rect x="18" y="15" width="1" height="1" fill="#000"/><rect x="24" y="15" width="2" height="1" fill="#000"/><rect x="27" y="15" width="1" height="1" fill="#000"/><rect x="33" y="15" width="2" height="1" fill="#000"/>
+              <rect x="12" y="26" width="1" height="1" fill="#000"/><rect x="14" y="26" width="2" height="1" fill="#000"/><rect x="17" y="26" width="1" height="1" fill="#000"/><rect x="20" y="26" width="1" height="1" fill="#000"/><rect x="22" y="26" width="2" height="1" fill="#000"/><rect x="25" y="26" width="1" height="1" fill="#000"/>
+              <rect x="13" y="27" width="1" height="1" fill="#000"/><rect x="15" y="27" width="1" height="1" fill="#000"/><rect x="18" y="27" width="2" height="1" fill="#000"/><rect x="21" y="27" width="1" height="1" fill="#000"/><rect x="24" y="27" width="1" height="1" fill="#000"/>
+              <rect x="12" y="28" width="2" height="1" fill="#000"/><rect x="16" y="28" width="1" height="1" fill="#000"/><rect x="19" y="28" width="1" height="1" fill="#000"/><rect x="22" y="28" width="2" height="1" fill="#000"/><rect x="25" y="28" width="1" height="1" fill="#000"/>
+              <rect x="13" y="29" width="1" height="1" fill="#000"/><rect x="15" y="29" width="2" height="1" fill="#000"/><rect x="18" y="29" width="1" height="1" fill="#000"/><rect x="21" y="29" width="1" height="1" fill="#000"/><rect x="25" y="29" width="1" height="1" fill="#000"/>
+              <rect x="12" y="30" width="1" height="1" fill="#000"/><rect x="14" y="30" width="1" height="1" fill="#000"/><rect x="17" y="30" width="2" height="1" fill="#000"/><rect x="20" y="30" width="1" height="1" fill="#000"/><rect x="22" y="30" width="2" height="1" fill="#000"/>
+              <rect x="13" y="31" width="2" height="1" fill="#000"/><rect x="16" y="31" width="1" height="1" fill="#000"/><rect x="19" y="31" width="1" height="1" fill="#000"/><rect x="21" y="31" width="1" height="1" fill="#000"/><rect x="24" y="31" width="1" height="1" fill="#000"/>
+              <rect x="12" y="32" width="1" height="1" fill="#000"/><rect x="15" y="32" width="2" height="1" fill="#000"/><rect x="18" y="32" width="1" height="1" fill="#000"/><rect x="22" y="32" width="1" height="1" fill="#000"/>
+            </svg>
+          </div>
+          <div style="background:var(--yellow-light);border-radius:8px;padding:10px 12px;margin-bottom:10px;border:1px solid var(--yellow);">
+            <div style="font-size:.78rem;font-weight:700;color:#7a5c00;">e-Saku · DuitNow QR</div>
+            <div style="font-size:.72rem;color:var(--muted);">Amount: <b style="color:var(--red);" id="qr-amount">RM —</b> &nbsp;·&nbsp; Ref: <b id="qr-ref">ESKU-20260622</b></div>
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.8;background:#f9f9f9;border-radius:8px;padding:10px 12px;">
+            <b>How to pay:</b> Open any banking/e-wallet app → Scan QR → Confirm amount → Pay
+          </div>
+        </div>
+        <!-- TNG panel -->
+        <div id="panel-tng" class="hidden" style="margin-top:14px;text-align:center;">
+          <div style="background:linear-gradient(135deg,#0057a8,#003d7a);border-radius:14px;padding:20px;color:#fff;margin-bottom:12px;">
+            <div style="font-size:2rem;margin-bottom:8px;">👛</div>
+            <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Touch 'n Go eWallet</div>
+            <div style="font-size:.8rem;opacity:.8;">You will be redirected to TNG app to complete payment</div>
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);">Amount: <b style="color:var(--red);" id="tng-amount">RM —</b></div>
+        </div>
+        <!-- GrabPay panel -->
+        <div id="panel-grab" class="hidden" style="margin-top:14px;text-align:center;">
+          <div style="background:linear-gradient(135deg,#00b14f,#007d38);border-radius:14px;padding:20px;color:#fff;margin-bottom:12px;">
+            <div style="font-size:2rem;margin-bottom:8px;">🚗</div>
+            <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">GrabPay</div>
+            <div style="font-size:.8rem;opacity:.8;">Open Grab app to authorise this payment</div>
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);">Amount: <b style="color:var(--red);" id="grab-amount">RM —</b></div>
+        </div>
+        <!-- ShopeePay panel -->
+        <div id="panel-shopee" class="hidden" style="margin-top:14px;text-align:center;">
+          <div style="background:linear-gradient(135deg,#ff5722,#e64a19);border-radius:14px;padding:20px;color:#fff;margin-bottom:12px;">
+            <div style="font-size:2rem;margin-bottom:8px;">🛍️</div>
+            <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">ShopeePay</div>
+            <div style="font-size:.8rem;opacity:.8;">Open Shopee app to complete payment</div>
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);">Amount: <b style="color:var(--red);" id="shopee-amount">RM —</b></div>
+        </div>
+      </div>
+
+      <!-- ── CARD (Stripe / iPay88) ── -->
+      <div id="gw-card" class="hidden">
+        <div class="gateway-badge">
+          <span style="font-size:.72rem;color:var(--muted);">Powered by</span>
+          <span class="gw-pill" style="background:#635bff;color:#fff;">Stripe</span>
+          <span class="gw-pill" style="background:#ef7f1a;color:#fff;">iPay88</span>
+        </div>
+        <div class="card-preview" style="margin-bottom:16px;">
+          <div style="font-size:.65rem;color:rgba(255,255,255,.6);margin-bottom:6px;letter-spacing:1px;">CARD NUMBER</div>
+          <div class="cp-num" id="card-display">•••• •••• •••• ••••</div>
+          <div class="cp-row">
+            <div><div class="cp-label">Card Holder</div><div id="card-name-display" style="font-size:.9rem;font-weight:600;">YOUR NAME</div></div>
+            <div><div class="cp-label">Expires</div><div id="card-exp-display" style="font-size:.9rem;font-weight:600;">MM/YY</div></div>
+            <div><div class="cp-label">Network</div><div id="card-network" style="font-size:.9rem;font-weight:600;">—</div></div>
+          </div>
+        </div>
+        <div class="form-group"><label>Card Number</label><input type="text" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"/></div>
+        <div class="form-group"><label>Cardholder Name</label><input type="text" placeholder="Name as on card" oninput="document.getElementById('card-name-display').textContent=this.value.toUpperCase()||'YOUR NAME'"/></div>
+        <div class="form-row">
+          <div class="form-group"><label>Expiry Date</label><input type="text" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)"/></div>
+          <div class="form-group"><label>CVV</label><input type="password" placeholder="•••" maxlength="3"/></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:-6px;margin-bottom:10px;">
+          <div style="background:#1a1f71;border-radius:5px;padding:3px 8px;font-size:.7rem;font-weight:800;color:#fff;letter-spacing:.5px;">VISA</div>
+          <div style="display:flex;gap:0;"><div style="width:22px;height:22px;border-radius:50%;background:#eb001b;"></div><div style="width:22px;height:22px;border-radius:50%;background:#f79e1b;margin-left:-8px;"></div></div>
+          <div style="background:#003087;border-radius:5px;padding:3px 8px;font-size:.65rem;font-weight:800;color:#fff;">AMEX</div>
+          <span style="font-size:.7rem;color:var(--muted);">Accepted cards</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);margin-bottom:4px;">
+          <span style="background:#635bff;color:#fff;border-radius:4px;padding:2px 6px;font-size:.65rem;font-weight:700;">stripe</span>
+          Secured by Stripe · PCI DSS Level 1
+        </div>
+      </div>
+
+      <!-- ── BNPL (PayLater) ── -->
+      <div id="gw-bnpl" class="hidden">
+        <div class="gateway-badge">
+          <span style="font-size:.72rem;color:var(--muted);">Powered by</span>
+          <span class="gw-pill" style="background:#00c896;color:#fff;">PayHalal</span>
+          <span class="gw-pill" style="background:#1dbf73;color:#fff;">Grab PayLater</span>
+        </div>
+        <div class="ew-method active" id="bnpl-payhalal" onclick="selectBnpl('payhalal')">
+          <div class="ew-logo" style="background:linear-gradient(135deg,#00c896,#009e76);">
+            <svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M10 20h20M20 10l10 10-10 10" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ew-info"><div class="ew-name">PayHalal</div><div class="ew-sub">Shariah-compliant · 0% interest</div></div>
+          <div class="ew-check active-check">✓</div>
+        </div>
+        <div class="ew-method" id="bnpl-grablater" onclick="selectBnpl('grablater')">
+          <div class="ew-logo" style="background:linear-gradient(135deg,#00b14f,#007d38);">
+            <svg width="20" height="20" viewBox="0 0 40 40" fill="none"><rect x="8" y="14" width="24" height="16" rx="2" stroke="#fff" stroke-width="2.5" fill="none"/><path d="M14 14v-4a6 6 0 0112 0v4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ew-info"><div class="ew-name">Grab PayLater</div><div class="ew-sub">Split into 4 payments, 0% fee</div></div>
+          <div class="ew-check"></div>
+        </div>
+        <div id="panel-payhalal" style="margin-top:14px;background:#f0fff8;border-radius:10px;padding:14px;border:1.5px solid #00c896;">
+          <div style="font-weight:700;font-size:.88rem;color:#007a5a;margin-bottom:6px;">💚 PayHalal – Shariah Compliant</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px;">Pay securely in full or split into monthly instalments, 0% interest.</div>
+          <div class="form-group" style="margin-bottom:10px;"><label>PayHalal Account / IC Number</label><input type="text" placeholder="e.g. 000000-00-0000"/></div>
+          <div class="form-group" style="margin-bottom:0;"><label>PIN</label><input type="password" placeholder="6-digit PIN" maxlength="6"/></div>
+        </div>
+        <div id="panel-grablater" class="hidden" style="margin-top:14px;background:#f0fff6;border-radius:10px;padding:14px;border:1.5px solid #00b14f;">
+          <div style="font-weight:700;font-size:.88rem;color:#007d38;margin-bottom:6px;">🟢 Grab PayLater</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:10px;">Top up now, pay later in 4 equal instalments with 0% fees via Grab.</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
+            <div style="background:#fff;border-radius:8px;padding:8px;text-align:center;border:1px solid var(--border);font-size:.72rem;font-weight:700;">1st<br><span style="color:#00b14f;" id="grab-inst">RM—</span></div>
+            <div style="background:#f5f5f5;border-radius:8px;padding:8px;text-align:center;border:1px solid var(--border);font-size:.72rem;color:var(--muted);">2nd<br>+30d</div>
+            <div style="background:#f5f5f5;border-radius:8px;padding:8px;text-align:center;border:1px solid var(--border);font-size:.72rem;color:var(--muted);">3rd<br>+60d</div>
+            <div style="background:#f5f5f5;border-radius:8px;padding:8px;text-align:center;border:1px solid var(--border);font-size:.72rem;color:var(--muted);">4th<br>+90d</div>
+          </div>
+          <div class="form-group" style="margin-bottom:0;"><label>Grab Phone Number</label><input type="tel" placeholder="+60 1X-XXXXXXXX"/></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="doTopUp()" style="margin-bottom:8px;">Confirm Top Up</button>
+    <p style="text-align:center;font-size:.76rem;color:var(--muted);">🔒 Secured by 256-bit SSL Encryption</p>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="bottomNav(this,'dashboard')"><div class="ni-icon">🏠</div><div class="ni-label">Home</div></div>
+    <div class="nav-item active" onclick="bottomNav(this,'topup')"><div class="ni-icon">⬆️</div><div class="ni-label">Top Up</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'history')"><div class="ni-icon">📋</div><div class="ni-label">History</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'card')"><div class="ni-icon">💳</div><div class="ni-label">My Card</div></div>
+  </div>
+</div>
+
+
+<!-- ═══ FPX BANK PORTAL MODAL ═══ -->
+<div class="modal-overlay" id="fpx-portal-modal" onclick="closeModal('fpx-portal-modal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+      <div id="modal-bank-logo" style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.9rem;flex-shrink:0;"></div>
+      <div><div class="modal-title" style="margin-bottom:0;" id="modal-bank-title">Bank Portal</div><div style="font-size:.75rem;color:var(--muted);">Secure online banking authorisation</div></div>
+    </div>
+    <div style="background:var(--red-light);border-radius:8px;padding:10px 12px;font-size:.78rem;color:var(--red-dark);margin-bottom:16px;">
+      🔐 This is a prototype simulation. Do not enter real banking credentials.
+    </div>
+    <div class="form-group"><label>Username</label><input type="text" id="portal-user" placeholder="Enter your username"/></div>
+    <div class="form-group"><label>Password</label><input type="password" id="portal-pass" placeholder="Enter your password"/></div>
+    <button class="btn btn-primary btn-full" onclick="fpxAuthorise()">Authorise Payment →</button>
+  </div>
+</div>
+
+<!-- TAC MODAL -->
+<div class="modal-overlay" id="tac-modal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Enter TAC / OTP</div>
+    <div style="font-size:.85rem;color:var(--muted);margin-bottom:16px;">A 6-digit TAC has been sent to your registered phone number <b>+60 1•• ••••87</b>.</div>
+    <div class="pin-display" id="pin-display">
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-btn" onclick="pinInput('1')">1</button>
+      <button class="pin-btn" onclick="pinInput('2')">2</button>
+      <button class="pin-btn" onclick="pinInput('3')">3</button>
+      <button class="pin-btn" onclick="pinInput('4')">4</button>
+      <button class="pin-btn" onclick="pinInput('5')">5</button>
+      <button class="pin-btn" onclick="pinInput('6')">6</button>
+      <button class="pin-btn" onclick="pinInput('7')">7</button>
+      <button class="pin-btn" onclick="pinInput('8')">8</button>
+      <button class="pin-btn" onclick="pinInput('9')">9</button>
+      <button class="pin-btn" style="font-size:.85rem;" onclick="pinClear()">⌫</button>
+      <button class="pin-btn" onclick="pinInput('0')">0</button>
+      <button class="pin-btn" style="background:var(--red);color:#fff;border-color:var(--red);" onclick="pinConfirm()">✓</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ HISTORY ═══ -->
+<div id="page-history" class="page">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <button class="back-btn" onclick="nav('dashboard')">←</button>
+      <div class="topbar-logo">Transaction History</div>
+    </div>
+  </div>
+  <div class="scroll-area pb">
+    <div class="filter-tabs" style="margin-top:4px;">
+      <button class="filter-tab active" onclick="filterTab(this,'all')">All</button>
+      <button class="filter-tab" onclick="filterTab(this,'topup')">Top Ups</button>
+      <button class="filter-tab" onclick="filterTab(this,'canteen')">Canteen</button>
+      <button class="filter-tab" onclick="filterTab(this,'shop')">Bookshop</button>
+    </div>
+    <div class="date-label">TODAY</div>
+    <div class="txn-list" style="margin-bottom:0;">
+      <div class="txn-item" data-cat="topup"><div class="txn-icon topup">⬆️</div><div class="txn-info"><h4>Top Up via FPX</h4><p>Maybank · 9:14 AM</p></div><div class="txn-amount pos">+RM 50.00</div></div>
+      <div class="txn-item" data-cat="canteen"><div class="txn-icon spend">🍱</div><div class="txn-info"><h4>Canteen – Nasi Lemak</h4><p>7:45 AM</p></div><div class="txn-amount neg">-RM 3.50</div></div>
+    </div>
+    <div class="date-label">YESTERDAY</div>
+    <div class="txn-list" style="margin-bottom:0;">
+      <div class="txn-item" data-cat="shop"><div class="txn-icon spend">📚</div><div class="txn-info"><h4>School Bookshop</h4><p>2:10 PM</p></div><div class="txn-amount neg">-RM 12.00</div></div>
+      <div class="txn-item" data-cat="canteen"><div class="txn-icon spend">🥤</div><div class="txn-info"><h4>Canteen – Milo Ice</h4><p>1:20 PM</p></div><div class="txn-amount neg">-RM 1.50</div></div>
+      <div class="txn-item" data-cat="canteen"><div class="txn-icon spend">🍱</div><div class="txn-info"><h4>Canteen – Fried Rice</h4><p>7:30 AM</p></div><div class="txn-amount neg">-RM 4.00</div></div>
+    </div>
+    <div class="date-label">19 JUN 2026</div>
+    <div class="txn-list">
+      <div class="txn-item" data-cat="topup"><div class="txn-icon topup">⬆️</div><div class="txn-info"><h4>Top Up via DuitNow QR</h4><p>8:00 AM</p></div><div class="txn-amount pos">+RM 50.00</div></div>
+      <div class="txn-item" data-cat="canteen"><div class="txn-icon spend">🍱</div><div class="txn-info"><h4>Canteen – Mee Goreng</h4><p>7:42 AM</p></div><div class="txn-amount neg">-RM 3.00</div></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="bottomNav(this,'dashboard')"><div class="ni-icon">🏠</div><div class="ni-label">Home</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'topup')"><div class="ni-icon">⬆️</div><div class="ni-label">Top Up</div></div>
+    <div class="nav-item active" onclick="bottomNav(this,'history')"><div class="ni-icon">📋</div><div class="ni-label">History</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'card')"><div class="ni-icon">💳</div><div class="ni-label">My Card</div></div>
+  </div>
+</div>
+
+
+<!-- ═══ CARD PAGE ═══ -->
+<div id="page-card" class="page">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <button class="back-btn" onclick="nav('dashboard')">←</button>
+      <div class="topbar-logo">Linked School Card</div>
+    </div>
+  </div>
+  <div class="scroll-area pb" style="margin-top:4px;">
+    <div class="physical-card">
+      <div class="pc-logo">e-<span>Saku</span></div>
+      <div class="pc-chip"></div>
+      <div class="pc-number">4821  8841  2200  4821</div>
+      <div class="pc-row">
+        <div><div class="pc-label">Card Holder</div><div class="pc-val" id="card-page-child">—</div></div>
+        <div><div class="pc-label">Valid Thru</div><div class="pc-val">12/28</div></div>
+        <div><div class="pc-label">Status</div><div class="pc-val" style="color:var(--yellow);">● Active</div></div>
+      </div>
+    </div>
+
+    <!-- Card balance summary -->
+    <div class="white-card" style="margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:2px;">Card Balance</div>
+          <div style="font-size:1.6rem;font-weight:800;color:var(--text);">RM <span id="card-balance-display">0.00</span></div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="nav('transfer')">💸 Transfer to Card</button>
+      </div>
+      <div style="height:1px;background:var(--border);margin-bottom:14px;"></div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span style="font-size:.85rem;color:var(--muted);">Daily Spending Limit</span><span style="font-weight:700;">RM <span id="card-limit-display">50.00</span></span></div>
+      <div class="limit-bar"><div class="limit-fill" id="card-limit-bar" style="width:0%;"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);"><span>Used: RM <span id="card-used-display">0.00</span></span><span>Remaining: RM <span id="card-remaining-display">50.00</span></span></div>
+    </div>
+    <div class="card-actions">
+      <div class="card-action-btn" onclick="toast('Card temporarily frozen!')"><div class="ca-icon">🔒</div><h4>Freeze Card</h4><p>Temporarily block</p></div>
+      <div class="card-action-btn" onclick="showModal('limit-modal')"><div class="ca-icon">⚙️</div><h4>Set Limit</h4><p>Daily spend limit</p></div>
+      <div class="card-action-btn" onclick="toast('PIN reset sent to your email.')"><div class="ca-icon">🔑</div><h4>Change PIN</h4><p>Update card PIN</p></div>
+      <div class="card-action-btn" onclick="toast('Issue report submitted!')"><div class="ca-icon">📞</div><h4>Report Issue</h4><p>Lost or damaged</p></div>
+    </div>
+    <div class="white-card">
+      <h3 style="font-size:.95rem;margin-bottom:14px;">Card Information</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;"><span style="color:var(--muted);">Card Number</span><span style="font-weight:600;">•••• •••• •••• 4821</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;"><span style="color:var(--muted);">Card Type</span><span style="font-weight:600;">e-Saku School Card</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;"><span style="color:var(--muted);">Issued To</span><span style="font-weight:600;" id="card-page-child2">—</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;"><span style="color:var(--muted);">Issue Date</span><span style="font-weight:600;">Jan 2025</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.88rem;"><span style="color:var(--muted);">Expiry</span><span style="font-weight:600;">Dec 2028</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="bottomNav(this,'dashboard')"><div class="ni-icon">🏠</div><div class="ni-label">Home</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'topup')"><div class="ni-icon">⬆️</div><div class="ni-label">Top Up</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'history')"><div class="ni-icon">📋</div><div class="ni-label">History</div></div>
+    <div class="nav-item active" onclick="bottomNav(this,'card')"><div class="ni-icon">💳</div><div class="ni-label">My Card</div></div>
+  </div>
+</div>
+
+
+<!-- ═══ TRANSFER TO CARD ═══ -->
+<div id="page-transfer" class="page">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <button class="back-btn" onclick="nav('dashboard')">←</button>
+      <div class="topbar-logo">Transfer to Card</div>
+    </div>
+  </div>
+  <div class="scroll-area pb">
+
+    <!-- Balances overview -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div class="white-card" style="margin-bottom:0;text-align:center;padding:16px;">
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:4px;">E-Wallet Balance</div>
+        <div style="font-size:1.3rem;font-weight:800;color:var(--red);">RM <span id="tr-wallet-bal">120.50</span></div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:2px;">📱 e-Saku Wallet</div>
+      </div>
+      <div class="white-card" style="margin-bottom:0;text-align:center;padding:16px;">
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:4px;">Card Balance</div>
+        <div style="font-size:1.3rem;font-weight:800;color:#1a9e5c;">RM <span id="tr-card-bal">0.00</span></div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:2px;">💳 School Card</div>
+      </div>
+    </div>
+
+    <!-- Arrow -->
+    <div style="text-align:center;margin:-8px 0 12px;font-size:1.5rem;color:var(--red);">⬇️</div>
+
+    <!-- Card preview -->
+    <div style="background:linear-gradient(135deg,var(--red),#7a0a1c);border-radius:16px;padding:18px 20px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden;">
+      <div style="position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,215,0,.15);"></div>
+      <div style="font-size:.7rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Transferring to</div>
+      <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:1rem;margin-bottom:2px;">e-<span style="color:var(--yellow);">Saku</span> School Card</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,.8);">4821 8841 2200 4821 · <span id="tr-child-name">Child</span></div>
+    </div>
+
+    <!-- Amount input -->
+    <div class="white-card">
+      <label style="margin-bottom:8px;">Transfer Amount (RM)</label>
+      <input type="number" id="tr-amount" placeholder="0.00" style="font-size:1.5rem;font-weight:700;text-align:center;" oninput="onTrAmountInput()"/>
+      <div style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:8px;">Available: <b style="color:var(--red);">RM <span id="tr-avail">120.50</span></b></div>
+      <div class="amount-grid" style="margin-top:14px;">
+        <button class="amount-btn" onclick="setTrAmount(10,this)">RM 10</button>
+        <button class="amount-btn" onclick="setTrAmount(20,this)">RM 20</button>
+        <button class="amount-btn" onclick="setTrAmount(30,this)">RM 30</button>
+        <button class="amount-btn" onclick="setTrAmount(50,this)">RM 50</button>
+        <button class="amount-btn" onclick="setTrAmount(100,this)">RM 100</button>
+        <button class="amount-btn" onclick="setTrAmountAll()">All</button>
+      </div>
+    </div>
+
+    <!-- PIN confirmation -->
+    <div class="white-card">
+      <div style="font-weight:700;font-size:.92rem;margin-bottom:4px;">🔐 Confirm with PIN</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px;">Enter your 6-digit e-Saku PIN to authorise this transfer.</div>
+      <div class="pin-display" id="tr-pin-display">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-pad">
+        <button class="pin-btn" onclick="trPin('1')">1</button>
+        <button class="pin-btn" onclick="trPin('2')">2</button>
+        <button class="pin-btn" onclick="trPin('3')">3</button>
+        <button class="pin-btn" onclick="trPin('4')">4</button>
+        <button class="pin-btn" onclick="trPin('5')">5</button>
+        <button class="pin-btn" onclick="trPin('6')">6</button>
+        <button class="pin-btn" onclick="trPin('7')">7</button>
+        <button class="pin-btn" onclick="trPin('8')">8</button>
+        <button class="pin-btn" onclick="trPin('9')">9</button>
+        <button class="pin-btn" style="font-size:.85rem;" onclick="trPinClear()">⌫</button>
+        <button class="pin-btn" onclick="trPin('0')">0</button>
+        <button class="pin-btn" style="background:var(--red);color:#fff;border-color:var(--red);" onclick="trPinConfirm()">✓</button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="doTransfer()" style="margin-bottom:8px;">Transfer to School Card</button>
+    <p style="text-align:center;font-size:.76rem;color:var(--muted);">💳 Amount will be instantly loaded onto the physical card</p>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="bottomNav(this,'dashboard')"><div class="ni-icon">🏠</div><div class="ni-label">Home</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'topup')"><div class="ni-icon">⬆️</div><div class="ni-label">Top Up</div></div>
+    <div class="nav-item" onclick="bottomNav(this,'history')"><div class="ni-icon">📋</div><div class="ni-label">History</div></div>
+    <div class="nav-item active" onclick="bottomNav(this,'card')"><div class="ni-icon">💳</div><div class="ni-label">My Card</div></div>
+  </div>
+</div>
+
+<!-- ═══ TRANSFER SUCCESS ═══ -->
+<div id="page-transfer-success" class="page">
+  <div class="success-screen">
+    <div class="success-icon">✅</div>
+    <h2>Transfer Successful!</h2>
+    <p>Money has been loaded onto <span id="ts-child">your child</span>'s school card.</p>
+    <div class="receipt-box">
+      <div class="receipt-row"><span style="color:var(--muted);">Amount Transferred</span><span style="font-weight:700;color:var(--red);" id="ts-amount">RM 0.00</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">From</span><span style="font-weight:600;">e-Saku E-Wallet</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">To</span><span style="font-weight:600;">School Card ••4821</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">Reference</span><span style="font-weight:600;font-size:.8rem;" id="ts-ref">TRF-—</span></div>
+      <div style="height:1px;background:var(--border);margin:10px 0;"></div>
+      <div class="receipt-row"><span style="color:var(--muted);">Wallet Balance</span><span style="font-weight:700;" id="ts-wallet-bal">RM 0.00</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">Card Balance</span><span style="font-weight:700;color:#1a9e5c;" id="ts-card-bal">RM 0.00</span></div>
+    </div>
+    <div style="display:flex;gap:10px;max-width:360px;width:100%;">
+      <button class="btn btn-outline btn-full" onclick="nav('card')">View Card</button>
+      <button class="btn btn-primary btn-full" onclick="nav('dashboard')">Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SUCCESS ═══ -->
+<div id="page-success" class="page">
+  <div class="success-screen">
+    <div class="success-icon">✅</div>
+    <h2>Top Up Successful!</h2>
+    <p>Your e-Saku wallet has been topped up.</p>
+    <div class="receipt-box">
+      <div class="receipt-row"><span style="color:var(--muted);">Amount</span><span style="font-weight:700;color:var(--red);" id="s-amount">RM 50.00</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">Method</span><span style="font-weight:600;" id="s-method">FPX</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">Reference</span><span style="font-weight:600;font-size:.8rem;" id="s-ref">MYSKU-—</span></div>
+      <div class="receipt-row"><span style="color:var(--muted);">New Balance</span><span style="font-weight:700;" id="s-balance">RM 170.50</span></div>
+    </div>
+    <button class="btn btn-primary btn-full" style="max-width:360px;" onclick="nav('dashboard')">Back to Dashboard</button>
+  </div>
+</div>
+
+
+<!-- LIMIT MODAL -->
+<div class="modal-overlay" id="limit-modal" onclick="closeModal('limit-modal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Set Daily Spending Limit</div>
+    <div class="form-group"><label>Daily Limit (RM)</label><input type="number" value="50" id="limit-input"/></div>
+    <div style="display:flex;gap:8px;margin-bottom:20px;">
+      <button class="amount-btn" onclick="document.getElementById('limit-input').value=20">RM 20</button>
+      <button class="amount-btn" onclick="document.getElementById('limit-input').value=50">RM 50</button>
+      <button class="amount-btn" onclick="document.getElementById('limit-input').value=100">RM 100</button>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="closeModal('limit-modal');toast('Daily limit updated!')">Save Limit</button>
+  </div>
+</div>
+
+<div class="toast" id="toast-el"></div>
+
+<script>
+// ── USER STATE ──
+const user = { name:'', child:'', childClass:'', balance:120.50, cardBalance:0, topupTotal:100, topupCount:2 };
+
+// ── NAV ──
+function nav(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('page-active'));
+  const t = document.getElementById('page-' + page);
+  if (t) { t.classList.add('page-active'); window.scrollTo(0,0); const sa = t.querySelector('.scroll-area,.auth-body,.landing-scroll'); if(sa) sa.scrollTop=0; }
+}
+function bottomNav(el, page) {
+  el.closest('.bottom-nav').querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  nav(page);
+}
+
+// ── UPDATE DASHBOARD WITH USER DATA ──
+function updateDashboard() {
+  const firstName = user.name.split(' ')[0] || user.name;
+  document.getElementById('dash-parent-name').textContent = firstName;
+  document.getElementById('dash-avatar').textContent = firstName.charAt(0).toUpperCase();
+  document.getElementById('dash-child-name').textContent = user.child || '—';
+  document.getElementById('dash-child-class').textContent = user.childClass || '—';
+  document.getElementById('dash-balance').textContent = user.balance.toFixed(2);
+  document.getElementById('topup-bal-display').textContent = user.balance.toFixed(2);
+  document.getElementById('card-page-child').textContent = user.child || '—';
+  document.getElementById('card-page-child2').textContent = user.child || '—';
+  // card page balances
+  document.getElementById('card-balance-display').textContent = user.cardBalance.toFixed(2);
+  const used = Math.min(user.cardBalance, 13); // prototype: simulate some spending
+  const limit = 50;
+  document.getElementById('card-limit-display').textContent = limit.toFixed(2);
+  document.getElementById('card-used-display').textContent = used.toFixed(2);
+  document.getElementById('card-remaining-display').textContent = Math.max(0, limit - used).toFixed(2);
+  document.getElementById('card-limit-bar').style.width = Math.min(100, (used/limit)*100) + '%';
+  // transfer page
+  document.getElementById('tr-wallet-bal').textContent = user.balance.toFixed(2);
+  document.getElementById('tr-card-bal').textContent = user.cardBalance.toFixed(2);
+  document.getElementById('tr-avail').textContent = user.balance.toFixed(2);
+  document.getElementById('tr-child-name').textContent = user.child || 'Child';
+  // date
+  const now = new Date();
+  document.getElementById('dash-date').textContent = now.toLocaleDateString('en-MY',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+// ── AUTH ──
+function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  const child = document.getElementById('reg-child').value.trim();
+  const cls = document.getElementById('reg-class').value.trim();
+  if (!name || !email) { toast('Please fill in your name and email.'); return; }
+  if (pass !== pass2) { toast('Passwords do not match!'); return; }
+  if (!child) { toast('Please enter your child\'s name.'); return; }
+  user.name = name; user.child = child; user.childClass = cls;
+  updateDashboard();
+  toast('Account created! Welcome, ' + name.split(' ')[0] + '!');
+  setTimeout(() => nav('dashboard'), 1400);
+}
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if (!email || !pass) { toast('Please enter your email and password.'); return; }
+  // use stored name or fallback
+  if (!user.name) { user.name = email.split('@')[0]; user.child = 'Your Child'; user.childClass = '-'; }
+  updateDashboard();
+  toast('Logging in...'); setTimeout(() => nav('dashboard'), 1200);
+}
+function doLogout() {
+  nav('landing');
+}
+
+// ── PAYMENT GATEWAY ──
+let selectedMethod = 'bank'; // current tab
+let selectedEwallet = 'duitnow';
+let selectedBnpl = 'payhalal';
+let pendingAmt = 0;
+
+function gwTab(btn, tab) {
+  document.querySelectorAll('.gw-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  selectedMethod = tab;
+  ['bank','ewallet','card','bnpl'].forEach(id => {
+    const el = document.getElementById('gw-' + id);
+    if (el) el.classList.toggle('hidden', id !== tab);
+  });
+}
+function selectBank(btn, bankName, color, textColor) {
+  document.querySelectorAll('.bank-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('modal-bank-title').textContent = bankName;
+  const logo = document.getElementById('modal-bank-logo');
+  logo.textContent = btn.querySelector('.bank-logo').textContent;
+  logo.style.background = color;
+  logo.style.color = textColor || '#fff';
+  showModal('fpx-portal-modal');
+}
+function selectEwallet(ew) {
+  selectedEwallet = ew;
+  ['duitnow','tng','grab','shopee'].forEach(id => {
+    const btn = document.getElementById('ew-' + id);
+    const panel = document.getElementById('panel-' + id);
+    const chk = btn ? btn.querySelector('.ew-check') : null;
+    if (btn) btn.classList.toggle('active', id === ew);
+    if (chk) { chk.textContent = id === ew ? '✓' : ''; chk.classList.toggle('active-check', id === ew); }
+    if (panel) panel.classList.toggle('hidden', id !== ew);
+  });
+  // update amounts
+  const amt = document.getElementById('topup-amount').value;
+  updateEwalletAmounts(amt);
+}
+function updateEwalletAmounts(v) {
+  const txt = v ? 'RM ' + parseFloat(v).toFixed(2) : 'RM —';
+  ['qr-amount','tng-amount','grab-amount','shopee-amount'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = txt;
+  });
+  if (v && parseFloat(v) > 0) {
+    const inst = document.getElementById('grab-inst');
+    if (inst) inst.textContent = 'RM ' + (parseFloat(v)/4).toFixed(2);
+  }
+}
+function selectBnpl(b) {
+  selectedBnpl = b;
+  ['payhalal','grablater'].forEach(id => {
+    const btn = document.getElementById('bnpl-' + id);
+    const panel = document.getElementById('panel-' + id);
+    const chk = btn ? btn.querySelector('.ew-check') : null;
+    if (btn) btn.classList.toggle('active', id === b);
+    if (chk) { chk.textContent = id === b ? '✓' : ''; chk.classList.toggle('active-check', id === b); }
+    if (panel) panel.classList.toggle('hidden', id !== b);
+  });
+}
+
+function setAmount(val, btn) {
+  document.getElementById('topup-amount').value = val;
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateEwalletAmounts(val);
+}
+function clearAmountBtns() {
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+  updateEwalletAmounts(document.getElementById('topup-amount').value);
+}
+function fpxAuthorise() {
+  const u = document.getElementById('portal-user').value.trim();
+  const p = document.getElementById('portal-pass').value;
+  if (!u || !p) { toast('Please enter your username and password.'); return; }
+  closeModal('fpx-portal-modal');
+  setTimeout(() => showModal('tac-modal'), 400);
+}
+let pinVal = '';
+function pinInput(d) {
+  if (pinVal.length >= 6) return;
+  pinVal += d;
+  const dots = document.querySelectorAll('#pin-display .pin-dot');
+  dots.forEach((dot,i) => dot.classList.toggle('filled', i < pinVal.length));
+  if (pinVal.length === 6) setTimeout(pinConfirm, 400);
+}
+function pinClear() {
+  pinVal = pinVal.slice(0,-1);
+  document.querySelectorAll('#pin-display .pin-dot').forEach((dot,i) => dot.classList.toggle('filled', i < pinVal.length));
+}
+function pinConfirm() {
+  if (pinVal.length < 4) { toast('Please enter at least 4 digits.'); return; }
+  closeModal('tac-modal');
+  pinVal = '';
+  document.querySelectorAll('#pin-display .pin-dot').forEach(d => d.classList.remove('filled'));
+  finaliseTopUp('FPX – ' + (document.getElementById('modal-bank-title').textContent));
+}
+function formatCard(input) {
+  let v = input.value.replace(/\D/g,'').substring(0,16);
+  input.value = v.replace(/(.{4})/g,'$1 ').trim();
+  document.getElementById('card-display').textContent = input.value || '•••• •••• •••• ••••';
+  const first = v.charAt(0);
+  document.getElementById('card-network').textContent = first==='4'?'Visa':first==='5'?'Mastercard':first==='3'?'Amex':'—';
+}
+function formatExpiry(input) {
+  let v = input.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+  input.value = v;
+  document.getElementById('card-exp-display').textContent = input.value || 'MM/YY';
+}
+function doTopUp() {
+  const amt = parseFloat(document.getElementById('topup-amount').value);
+  if (!amt || amt <= 0) { toast('Please enter a valid amount.'); return; }
+  pendingAmt = amt;
+  if (selectedMethod === 'bank') {
+    const activeBank = document.querySelector('.bank-btn.active');
+    if (!activeBank) { toast('Please select your bank first.'); return; }
+    showModal('fpx-portal-modal');
+  } else if (selectedMethod === 'ewallet') {
+    const labels = {duitnow:'DuitNow QR', tng:"Touch 'n Go", grab:'GrabPay', shopee:'ShopeePay'};
+    finaliseTopUp(labels[selectedEwallet] || 'E-Wallet');
+  } else if (selectedMethod === 'card') {
+    const num = document.getElementById('card-display').textContent;
+    if (num === '•••• •••• •••• ••••') { toast('Please enter your card details.'); return; }
+    finaliseTopUp('Credit/Debit Card (Stripe)');
+  } else if (selectedMethod === 'bnpl') {
+    const labels = {payhalal:'PayHalal', grablater:'Grab PayLater'};
+    finaliseTopUp(labels[selectedBnpl] || 'BNPL');
+  }
+}
+function finaliseTopUp(methodLabel) {
+  const amt = pendingAmt;
+  user.balance += amt;
+  user.topupTotal += amt;
+  user.topupCount += 1;
+  const ref = 'ESKU-' + Date.now().toString().slice(-8);
+  document.getElementById('s-amount').textContent = 'RM ' + amt.toFixed(2);
+  document.getElementById('s-method').textContent = methodLabel;
+  document.getElementById('s-ref').textContent = ref;
+  document.getElementById('s-balance').textContent = 'RM ' + user.balance.toFixed(2);
+  document.getElementById('dash-balance').textContent = user.balance.toFixed(2);
+  document.getElementById('topup-bal-display').textContent = user.balance.toFixed(2);
+  nav('success');
+}
+
+// ── TRANSFER TO CARD ──
+let trPinVal = '';
+
+function setTrAmount(val, btn) {
+  document.getElementById('tr-amount').value = val;
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function setTrAmountAll() {
+  document.getElementById('tr-amount').value = user.balance.toFixed(2);
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+}
+function onTrAmountInput() {
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+}
+function trPin(d) {
+  if (trPinVal.length >= 6) return;
+  trPinVal += d;
+  const dots = document.querySelectorAll('#tr-pin-display .pin-dot');
+  dots.forEach((dot,i) => dot.classList.toggle('filled', i < trPinVal.length));
+  if (trPinVal.length === 6) setTimeout(trPinConfirm, 400);
+}
+function trPinClear() {
+  trPinVal = trPinVal.slice(0,-1);
+  const dots = document.querySelectorAll('#tr-pin-display .pin-dot');
+  dots.forEach((dot,i) => dot.classList.toggle('filled', i < trPinVal.length));
+}
+function trPinConfirm() {
+  if (trPinVal.length < 4) { toast('Please enter at least 4 digits.'); return; }
+  trPinVal = '';
+  document.querySelectorAll('#tr-pin-display .pin-dot').forEach(d => d.classList.remove('filled'));
+  doTransfer();
+}
+function doTransfer() {
+  const amt = parseFloat(document.getElementById('tr-amount').value);
+  if (!amt || amt <= 0) { toast('Please enter a transfer amount.'); return; }
+  if (amt > user.balance) { toast('Insufficient wallet balance!'); return; }
+  // deduct from wallet, add to card
+  user.balance -= amt;
+  user.cardBalance += amt;
+  updateDashboard();
+  // fill success page
+  const ref = 'TRF-' + Date.now().toString().slice(-8);
+  document.getElementById('ts-amount').textContent = 'RM ' + amt.toFixed(2);
+  document.getElementById('ts-ref').textContent = ref;
+  document.getElementById('ts-wallet-bal').textContent = 'RM ' + user.balance.toFixed(2);
+  document.getElementById('ts-card-bal').textContent = 'RM ' + user.cardBalance.toFixed(2);
+  document.getElementById('ts-child').textContent = user.child || 'your child';
+  // reset form
+  document.getElementById('tr-amount').value = '';
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+  nav('transfer-success');
+}
+
+// ── HISTORY FILTER ──
+function filterTab(btn, cat) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.txn-item').forEach(item => {
+    const cats = (item.dataset.cat||'').split(' ');
+    item.style.display = (cat==='all'||cats.includes(cat)) ? 'flex' : 'none';
+  });
+}
+
+// ── TOAST ──
+function toast(msg) {
+  const el = document.getElementById('toast-el');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ── MODAL ──
+function showModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+</script>
+</body>
+</html>
